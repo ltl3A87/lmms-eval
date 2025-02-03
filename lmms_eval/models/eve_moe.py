@@ -404,7 +404,7 @@ class EVE_MoE(lmms):
             # TODO: attention to this major generation step...
             try:
                 cont = self.model.generate(
-                    input_ids_list,
+                    input_ids,
                     images=image_tensor,
                     attention_masks=attention_masks,
                     do_sample=True if gen_kwargs["temperature"] > 0 else False,
