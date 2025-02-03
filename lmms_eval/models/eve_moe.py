@@ -60,7 +60,7 @@ class EVE_MoE(lmms):
         batch_size: Optional[Union[int, str]] = 1,
         model_name=None,
         attn_implementation=best_fit_attn_implementation,
-        device_map="cuda:0",
+        device_map="auto",
         conv_template="qwen",
         use_cache=True,
         tie_weights: bool = True,
