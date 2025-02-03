@@ -415,7 +415,15 @@ class EVE_MoE(lmms):
                     use_cache=self.use_cache,
                 )
                 print("Generated tokens: ", cont)
-                text_outputs = self.tokenizer.batch_decode(cont, skip_special_tokens=True)
+                input_token_len = input_ids.shape[1]
+                n_diff_input_output = (
+                        input_ids != cont[:, :input_token_len]).sum().item()
+                if n_diff_input_output > 0:
+                    print(
+                        f'[Warning] {n_diff_input_output} output_ids are not the same as the input_ids')
+                text_outputs = self.tokenizer.batch_decode(
+                    cont[:, input_token_len:], skip_special_tokens=True)[0]
+                # text_outputs = self.tokenizer.batch_decode(cont, skip_special_tokens=True)
             except Exception as e:
                 raise e
                 eval_logger.error(f"Error {e} in generating")
