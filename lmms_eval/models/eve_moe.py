@@ -422,7 +422,7 @@ class EVE_MoE(lmms):
                     print(
                         f'[Warning] {n_diff_input_output} output_ids are not the same as the input_ids')
                 text_outputs = self.tokenizer.batch_decode(
-                    cont[:, input_token_len:], skip_special_tokens=True)[0]
+                    cont[:, input_token_len:], skip_special_tokens=True)
                 # text_outputs = self.tokenizer.batch_decode(cont, skip_special_tokens=True)
             except Exception as e:
                 raise e
