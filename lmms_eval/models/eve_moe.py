@@ -138,7 +138,8 @@ class EVE_MoE(lmms):
             if accelerator.distributed_type == DistributedType.FSDP or accelerator.distributed_type == DistributedType.DEEPSPEED:
                 self._model = accelerator.prepare(self.model)
             else:
-                self._model = accelerator.prepare_model(self.model, evaluation_mode=True)
+                self._model = accelerator.prepare(self.model)
+                # self._model = accelerator.prepare_model(self.model, evaluation_mode=True)
             self.accelerator = accelerator
             if self.accelerator.is_local_main_process:
                 eval_logger.info(f"Using {accelerator.num_processes} devices with data parallelism")
