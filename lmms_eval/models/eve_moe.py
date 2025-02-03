@@ -264,14 +264,14 @@ class EVE_MoE(lmms):
             conv.append_message(conv.roles[0], prompts_input)
             conv.append_message(conv.roles[1], None)
             # prompt = conv.get_prompt()
-            prompt = conv.get_prompt(getattr(self.model_config, "pre_text_fitu", False))
+            prompt = conv.get_prompt(getattr(self._config, "pre_text_fitu", False))
             pad_token_id = self.tokenizer.pad_token_id if self.tokenizer.pad_token_id is not None else self.tokenizer.eos_token_id
             contxt_id = tokenizer_image_token(prompt, self.tokenizer, IMAGE_TOKEN_INDEX, return_tensors="pt").unsqueeze(0).to(self.device)
             # Add the answer of the second role
             conv.messages[1][1] = continuation
 
             # prompt = conv.get_prompt()
-            prompt = conv.get_prompt(getattr(self.model_config, "pre_text_fitu", False))
+            prompt = conv.get_prompt(getattr(self._config, "pre_text_fitu", False))
             input_ids = tokenizer_image_token(prompt, self.tokenizer, IMAGE_TOKEN_INDEX, return_tensors="pt").unsqueeze(0).to(self.device)
             labels = input_ids.clone()
             # Context part no need to calculate for loss
@@ -380,7 +380,7 @@ class EVE_MoE(lmms):
                 conv.append_message(conv.roles[0], question)
                 conv.append_message(conv.roles[1], None)
                 # prompt_question = conv.get_prompt()
-                prompt_question = conv.get_prompt(getattr(self.model_config, "pre_text_fitu", False))
+                prompt_question = conv.get_prompt(getattr(self._config, "pre_text_fitu", False))
                 question_input.append(prompt_question)
 
             # input_ids = tokenizer_image_token(prompt, self.tokenizer, IMAGE_TOKEN_INDEX, return_tensors="pt").unsqueeze(0).to(self.device)
