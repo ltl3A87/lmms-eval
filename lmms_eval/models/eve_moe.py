@@ -406,7 +406,7 @@ class EVE_MoE(lmms):
                 cont = self.model.generate(
                     input_ids,
                     images=image_tensor,
-                    attention_masks=attention_masks,
+                    attention_mask=attention_masks,
                     do_sample=True if gen_kwargs["temperature"] > 0 else False,
                     temperature=gen_kwargs["temperature"],
                     top_p=gen_kwargs["top_p"],
