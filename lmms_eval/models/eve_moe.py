@@ -396,14 +396,14 @@ class EVE_MoE(lmms):
                 gen_kwargs["num_beams"] = 1
 
             input_ids_list = [tokenizer_image_token(prompt, self.tokenizer, IMAGE_TOKEN_INDEX, return_tensors="pt") for prompt in question_input]
-            pad_token_ids = self.tokenizer.pad_token_id if self.tokenizer.pad_token_id is not None else self.tokenizer.eos_token_id
-            input_ids = self.pad_sequence(input_ids_list, batch_first=True, padding_value=pad_token_ids).to(self.device)
+            # pad_token_ids = self.tokenizer.pad_token_id if self.tokenizer.pad_token_id is not None else self.tokenizer.eos_token_id
+            # input_ids = self.pad_sequence(input_ids_list, batch_first=True, padding_value=pad_token_ids).to(self.device)
             attention_masks = input_ids.ne(pad_token_ids).to(self.device)
             # These steps are not in LLaVA's original code, but are necessary for generation to work
             # TODO: attention to this major generation step...
             try:
                 cont = self.model.generate(
-                    input_ids,
+                    input_ids_list,
                     images=image_tensor,
                     do_sample=True if gen_kwargs["temperature"] > 0 else False,
                     temperature=gen_kwargs["temperature"],
