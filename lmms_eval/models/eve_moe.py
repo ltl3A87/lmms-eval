@@ -56,7 +56,7 @@ class EVE_MoE(lmms):
         self,
         pretrained: str = "checkpoints/eve-qwen25-7B-fitu-instruct-imgexp-autoclip-add-cos-multi-concatre34-pretext-mask-addtext-agg-linear/checkpoint-19200",
         truncation: Optional[bool] = True,
-        device: Optional[str] = "cuda:0",
+        device: Optional[str] = "cuda",
         batch_size: Optional[Union[int, str]] = 1,
         model_name=None,
         attn_implementation=best_fit_attn_implementation,
