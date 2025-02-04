@@ -100,7 +100,7 @@ class EVE_MoE(lmms):
             # Try to load the model with the multimodal argument
             # self._tokenizer, self._model, self._image_processor, self._max_length = load_pretrained_model(pretrained, None, model_name, device_map=self.device_map, **llava_model_args)
             self._tokenizer, self._model, self._image_processor, self._max_length = load_pretrained_model(
-                model_path, None, model_name, moe=True, image_expert=True,
+                model_path, None, model_name, device_map=self.device_map, moe=True, image_expert=True,
                 qwen25=True,
                 shared=False, clip_init=False)
         except TypeError:
@@ -108,7 +108,7 @@ class EVE_MoE(lmms):
             llava_model_args.pop("multimodal", None)
             # self._tokenizer, self._model, self._image_processor, self._max_length = load_pretrained_model(pretrained, None, model_name, device_map=self.device_map, **llava_model_args)
             self._tokenizer, self._model, self._image_processor, self._max_length = load_pretrained_model(
-                model_path, None, model_name, moe=True, image_expert=True,
+                model_path, None, model_name, device_map=self.device_map, moe=True, image_expert=True,
                 qwen25=True,
                 shared=False, clip_init=False)
         self._config = self._model.config
